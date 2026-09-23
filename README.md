@@ -154,14 +154,13 @@ python method1_fixed_v2_robustscaler.py
 
 Ground truth treats workflow IDs **3401–4000** as anomalies; everything else is normal. Metrics use `1 = anomaly`.
 
-> **[TODO: paste your numbers from a run]**
 
 | Metric | Value |
 |---|---|
-| Accuracy | |
-| Precision | |
-| Recall | |
-| F1 score | |
+| Accuracy |0.9955|
+| Precision |0.9852|
+| Recall |1.0|
+| F1 score |0.9926|
 
 ---
 
