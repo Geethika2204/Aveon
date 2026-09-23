@@ -163,7 +163,7 @@ Ground truth treats workflow IDs **3401–4000** as anomalies; everything else i
 | F1 score |0.9926|
 
 ---
-Confusion matrix
+### Confusion matrix
 
 The script prints the matrix from sklearn.metrics.confusion_matrix, laid out as [[TN, FP], [FN, TP]]. Copy your counts into the table below.
 
