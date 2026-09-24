@@ -21,12 +21,12 @@ This project trains an **autoencoder on normal workflows only**. It learns to re
 
 ```mermaid
 flowchart LR
-    A[📂 Logs CSV] --> B[🧮 Feature engineering<br/>latency · response size · gaps]
-    B --> C[⚖️ RobustScaler<br/>fit on train only]
-    C --> D[🧠 Autoencoder<br/>trained on normal data]
-    D --> E[📏 Reconstruction error<br/>vs 3σ threshold]
-    E -->|below| F[✅ NORMAL]
-    E -->|above| G[🚨 ALERT + per-feature explanation]
+    A[📂 Logs CSV] --> B[Feature engineering<br/>latency · response size · gaps]
+    B --> C[RobustScaler<br/>fit on train only]
+    C --> D[Autoencoder<br/>trained on normal data]
+    D --> E[Reconstruction error<br/>vs 3σ threshold]
+    E -->|below| F[NORMAL]
+    E -->|above| G[ALERT + per-feature explanation]
 ```
 
 ---
