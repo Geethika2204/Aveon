@@ -138,7 +138,6 @@ matplotlib
 python method1_fixed_v2_robustscaler.py
 ```
 
-> ⚠️ **Before the first run:** the script was exported from a Colab notebook. Delete the `!pip install ...` line at the top (it is Colab-only syntax and fails in a normal `.py` file), and add `import matplotlib.pyplot as plt` to the imports, because the plotting section uses `plt` but its import is commented out.
 
 ---
 
