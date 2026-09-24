@@ -21,12 +21,12 @@ This project trains an **autoencoder on normal workflows only**. It learns to re
 
 ```mermaid
 flowchart LR
-    A[📂 Logs CSV] --> B[Feature engineering<br/>latency · response size · gaps]
-    B --> C[RobustScaler<br/>fit on train only]
-    C --> D[Autoencoder<br/>trained on normal data]
-    D --> E[Reconstruction error<br/>vs 3σ threshold]
-    E -->|below| F[NORMAL]
-    E -->|above| G[ALERT + per-feature explanation]
+    A[📂 Logs CSV] --> B[🧮 Feature engineering<br/>latency · response size · gaps]
+    B --> C[⚖️ RobustScaler<br/>fit on train only]
+    C --> D[🧠 Autoencoder<br/>trained on normal data]
+    D --> E[📏 Reconstruction error<br/>vs 3σ threshold]
+    E -->|below| F[✅ NORMAL]
+    E -->|above| G[🚨 ALERT + per-feature explanation]
 ```
 
 ---
@@ -162,15 +162,17 @@ Ground truth treats workflow IDs **3401–4000** as anomalies; everything else i
 | Recall |1.0|
 | F1 score |0.9926|
 
----
 ### Confusion matrix
 
-The script prints the matrix from sklearn.metrics.confusion_matrix, laid out as [[TN, FP], [FN, TP]]. Copy your counts into the table below.
+The script prints the matrix from `sklearn.metrics.confusion_matrix`, laid out as `[[TN, FP], [FN, TP]]`. Copy your counts into the table below.
 
+|  | Predicted **NORMAL** | Predicted **ANOMALY** |
+|---|:---:|:---:|
+| **Actual NORMAL** | TN = `1391` | FP = `9` |
+| **Actual ANOMALY** | FN = `0` | TP = `600` |
 
-	Predicted NORMAL	Predicted ANOMALY
-Actual NORMAL	TN = 1391	FP = 9
-Actual ANOMALY	FN = 0	TP = 600
+---
+
 ## 🧠 Design choices
 
 - **Train on normal data only.** No labelled anomalies needed, and it can catch failure modes you haven't seen before.
@@ -178,12 +180,6 @@ Actual ANOMALY	FN = 0	TP = 600
 - **Feature-level explanations.** Alerts are actionable, not just a score.
 - **Fixed seeds (42).** Python, NumPy and TensorFlow are seeded for repeatable runs.
 
-## ⚠️ Notes and limitations
-
-- The decoder ends in a **sigmoid** (outputs between 0 and 1), while `RobustScaler` output is not bounded to that range. If reconstruction error looks inflated for extreme values, try a linear output activation.
-- The **3σ rule** assumes training reconstruction errors are roughly well-behaved; a stricter or looser multiplier trades false alarms against missed anomalies.
-- The ground-truth ID range (3401–4000) is **hard-coded**, so change it if your data differs.
-- `results.csv` lists only flagged workflows, not every test workflow.
 
 ## 🗂️ Project layout
 
